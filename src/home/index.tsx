@@ -12,7 +12,6 @@ import CameraParams from "./CameraParams";
 const Home = () => {
   const [pageState, setPageState] = useState<any>({
     loading: true,
-    domains: [],
     selectedCamera: false,
   });
 
