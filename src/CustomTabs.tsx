@@ -19,19 +19,13 @@ function a11yProps(index: number) {
 
 export default function BasicTabs(props: any) {
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event: React.SyntheticEvent, newValue: any) => {
     setValue(newValue);
   };
-
   const ComponentToRender = (props: any) => {
     const { value, tabs, pageState } = props;
     const TabDetails: any = tabs[value]?.moduleName;
-    return TabDetails ? (
-      <TabDetails pageState={pageState} />
-    ) : (
-      <div>Page not found</div>
-    );
+    return TabDetails ? <TabDetails {...props} /> : <div>Page not found</div>;
   };
 
   return (
@@ -45,12 +39,19 @@ export default function BasicTabs(props: any) {
           {Array.isArray(props.tabs) &&
             props.tabs.length > 0 &&
             props.tabs.map((tabDetails: any, index: number) => {
-              return <Tab label={tabDetails.tabName} {...a11yProps(index)} />;
+              return (
+                <Tab
+                  key={`tab-${index}`}
+                  label={tabDetails.tabName}
+                  {...a11yProps(index)}
+                />
+              );
             })}
         </Tabs>
       </Box>
       <Box>
         <ComponentToRender
+          {...props}
           tabs={props.tabs}
           value={value}
           pageState={props.pageState}

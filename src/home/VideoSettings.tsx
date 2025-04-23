@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Grid, Box, Button } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
+import {FormControl,MenuItem,InputLabel} from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { videoFormatOptions, frameRateOptions } from "../utils";
 

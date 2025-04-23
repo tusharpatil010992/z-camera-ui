@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Layout from "../Layout";
-import { Paper } from "@mui/material";
-import Settings from "./Settings";
+import { Paper, Box } from "@mui/material";
 
 import AppBar from "@mui/material/AppBar";
-import Application from "./Applicaton";
+import AddCamera from "./AddCamera";
 import { Title } from "../Title";
+import BasicTabs from "../CustomTabs";
+import CameraParams from "./CameraParams";
 
 const Home = () => {
   const [pageState, setPageState] = useState<any>({
@@ -14,6 +15,19 @@ const Home = () => {
     domains: [],
     selectedCamera: "",
   });
+
+  const initialState = {
+    camera1: "",
+    camera2: "",
+    camera3: "",
+    camera4: "",
+    camera5: "",
+    camera6: "",
+  };
+
+  const [cameras, setCameras] = useState<any>(initialState);
+  const [cameraConnected, setCameraConnected] = useState<any>(initialState);
+  const [cameraStatus, setcameraStatus] = useState<any>(initialState);
 
   useEffect(() => {
     console.log("setting page loading");
@@ -25,6 +39,19 @@ const Home = () => {
     });
   }, []);
 
+  const tabDetails = [
+    {
+      tabName: "Camera IP Setting",
+      moduleName: AddCamera,
+    },
+    {
+      tabName: "Camera Parameters",
+      moduleName: CameraParams,
+    },
+  ];
+
+  console.log("Camera", cameras);
+
   return pageState.loading ? (
     <div>Loading.....</div>
   ) : (
@@ -34,10 +61,19 @@ const Home = () => {
           <AppBar color="primary" position="static">
             <Title title="Z-CAMERA" />
           </AppBar>
-          <Application pageState={pageState} setPageState={setPageState} />
-          {Array.isArray(pageState.domains) && pageState.domains.length > 0 && (
-            <Settings pageState={pageState} />
-          )}
+
+          <Box p={2}>
+            <BasicTabs
+              tabs={tabDetails}
+              pageState={pageState}
+              cameras={cameras}
+              setCameras={setCameras}
+              cameraConnected={cameraConnected}
+              setCameraConnected={setCameraConnected}
+              cameraStatus={cameraStatus}
+              setcameraStatus={setcameraStatus}
+            />
+          </Box>
         </Paper>
       </Grid>
     </Layout>
