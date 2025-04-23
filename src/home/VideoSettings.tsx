@@ -37,8 +37,8 @@ const VideoSettings = (props: any) => {
 
   const onSubmit = (data: any) => {
     console.log("data ", data);
+    //add code here
   };
-
 
   return (
     <Box p={2}>
