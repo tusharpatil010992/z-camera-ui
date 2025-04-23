@@ -16,6 +16,7 @@ const AddCamera = (props: any) => {
     setCameraConnected,
     cameraStatus,
     setcameraStatus,
+    setPageState,
   } = props;
 
   const {
@@ -62,6 +63,7 @@ const AddCamera = (props: any) => {
     //   });
 
     //temp
+
     setCameraConnected({
       camera1: "connected",
       camera2: "connected",
@@ -72,6 +74,13 @@ const AddCamera = (props: any) => {
     });
 
     setCameras(data);
+
+    setPageState((prev: any) => {
+      return {
+        ...prev,
+        selectedCamera: true,
+      };
+    });
   };
   return (
     <Box p={5}>

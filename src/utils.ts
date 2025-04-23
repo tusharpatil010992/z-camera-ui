@@ -21,3 +21,10 @@ export const apiCall = async (method: "GET" | "POST" , url:string, data?:any) =>
       data: data || null, 
     });
 };
+
+const capitalizeFirst = (str:string) => str.charAt(0).toUpperCase() + str.slice(1);
+
+export const getHeadingName = (rawHeadingName: string) => {
+    const arrStr = rawHeadingName.split(/(\d+)/);
+    return  `${capitalizeFirst(arrStr[0])} ${arrStr[1]}`
+}

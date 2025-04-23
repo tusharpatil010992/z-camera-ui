@@ -13,7 +13,7 @@ const Home = () => {
   const [pageState, setPageState] = useState<any>({
     loading: true,
     domains: [],
-    selectedCamera: "",
+    selectedCamera: false,
   });
 
   const initialState = {
@@ -30,7 +30,6 @@ const Home = () => {
   const [cameraStatus, setcameraStatus] = useState<any>(initialState);
 
   useEffect(() => {
-    console.log("setting page loading");
     setPageState((prev: any) => {
       return {
         ...prev,
@@ -50,30 +49,30 @@ const Home = () => {
     },
   ];
 
-  console.log("Camera", cameras);
-
-  return pageState.loading ? (
-    <div>Loading.....</div>
-  ) : (
+  return (
     <Layout>
       <Grid size={12}>
         <Paper elevation={3}>
           <AppBar color="primary" position="static">
             <Title title="Z-CAMERA" />
           </AppBar>
-
-          <Box p={2}>
-            <BasicTabs
-              tabs={tabDetails}
-              pageState={pageState}
-              cameras={cameras}
-              setCameras={setCameras}
-              cameraConnected={cameraConnected}
-              setCameraConnected={setCameraConnected}
-              cameraStatus={cameraStatus}
-              setcameraStatus={setcameraStatus}
-            />
-          </Box>
+          {pageState.loading ? (
+            <></>
+          ) : (
+            <Box p={2}>
+              <BasicTabs
+                tabs={tabDetails}
+                pageState={pageState}
+                setPageState={setPageState}
+                cameras={cameras}
+                setCameras={setCameras}
+                cameraConnected={cameraConnected}
+                setCameraConnected={setCameraConnected}
+                cameraStatus={cameraStatus}
+                setcameraStatus={setcameraStatus}
+              />
+            </Box>
+          )}
         </Paper>
       </Grid>
     </Layout>
